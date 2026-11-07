@@ -18,6 +18,7 @@ spec:
       labels:
         app: parser
     spec:
+      terminationGracePeriodSeconds: 40
       containers:
         - name: parser
           image: parser-service:1
@@ -29,6 +30,10 @@ spec:
             - {name: MODEL_VERSION, value: "v1"}
             - {name: S3_ENDPOINT, value: "http://seaweedfs.data.svc.cluster.local:8333"}
             - {name: MAX_NEW_TOKENS, value: "60"}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "10"]
           envFrom:
             - secretRef:
                 name: seaweed-s3

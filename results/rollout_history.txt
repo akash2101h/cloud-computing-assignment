@@ -1,0 +1,7 @@
+deployment.apps/parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+3         <none>
+5         <none>
+6         <none>
+
