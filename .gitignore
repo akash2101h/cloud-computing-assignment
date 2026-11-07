@@ -13,3 +13,4 @@ model_artifacts/
 output/
 .pytest_cache/
 .ruff_cache/
+dist/
