@@ -1,0 +1,6 @@
+run 1 parser-77dd7968cd-2p9vj 7 s
+run 1 parser-77dd7968cd-lfwhr 7 s
+run 2 parser-77dd7968cd-d4dmr 12 s
+run 2 parser-77dd7968cd-rx4nw 9 s
+run 3 parser-77dd7968cd-vj8gl 7 s
+run 3 parser-77dd7968cd-xk9k4 7 s

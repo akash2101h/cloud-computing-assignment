@@ -1,0 +1,13 @@
+parser-77dd7968cd-c9nzs   1/1   Terminating   0     6m18s
+parser-77dd7968cd-jxshk   1/1   Running       0     6m25s
+parser-77dd7968cd-m74d7   1/1   Running       0     10s
+parser-77dd7968cd-jxshk   1/1   Running   0     6m36s
+parser-77dd7968cd-m74d7   1/1   Running   0     21s
+parser-77dd7968cd-jxshk   1/1   Running   0     6m46s
+parser-77dd7968cd-m74d7   1/1   Running   0     31s
+parser-77dd7968cd-jxshk   1/1   Running   0     6m56s
+parser-77dd7968cd-m74d7   1/1   Running   0     41s
+parser-77dd7968cd-jxshk   1/1   Running   0     7m6s
+parser-77dd7968cd-m74d7   1/1   Running   0     51s
+parser-77dd7968cd-jxshk   1/1   Running   0     7m17s
+parser-77dd7968cd-m74d7   1/1   Running   0     62s

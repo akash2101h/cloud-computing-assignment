@@ -1,0 +1,14 @@
+== pod/parser-77dd7968cd-vj8gl
+downloading s3://models/v1/config.json
+downloading s3://models/v1/generation_config.json
+downloading s3://models/v1/model.safetensors
+downloading s3://models/v1/tokenizer.json
+downloading s3://models/v1/tokenizer_config.json
+model loaded, ready
+== pod/parser-77dd7968cd-xk9k4
+downloading s3://models/v1/config.json
+downloading s3://models/v1/generation_config.json
+downloading s3://models/v1/model.safetensors
+downloading s3://models/v1/tokenizer.json
+downloading s3://models/v1/tokenizer_config.json
+model loaded, ready
