@@ -20,9 +20,9 @@ kubectl -n data create secret generic seaweed-s3-config --from-file=s3.json=/tmp
   --dry-run=client -o yaml | kubectl apply -f -
 rm -f /tmp/s3.json
 
-kubectl apply -f k8s/seaweedfs.yaml
-kubectl -n data rollout status deploy/seaweedfs --timeout=180s
-
 k3d image import parser-service:1 teacher-worker:1 -c cloudlab
+kubectl apply -f k8s/seaweedfs.yaml
+kubectl -n data rollout status deploy/seaweedfs --timeout=600s
+
 
 echo "SeaweedFS is up. Next: scripts/seed.sh, then kubectl apply -f k8s/app.yaml -f k8s/hpa.yaml"
