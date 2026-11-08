@@ -1,0 +1,4 @@
+hourly cost (2 replicas): INR 7.9
+requests per hour: 9099.7
+cost per 1000 requests: INR 0.8682
+error budget (99% of 301): 3.0100000000000002 -> 3 requests; used 0
