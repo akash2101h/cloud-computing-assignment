@@ -40,7 +40,7 @@ Replace `OLLAMA_HOST_PLACEHOLDER` in `k8s/teacher-jobs.yaml` with the host IP th
 
 ## CI
 `.github/workflows/ci.yml`: lint, unit tests, model evaluation from the GitHub Release, quality gate (`--min-validity 95`), gitleaks.
-- Passing run (v1): TODO paste the URL of the green push-triggered run
+- Passing run (v1): https://github.com/akash2101h/cloud-computing-assignment/actions/runs/42449324700
 - Failing run at the quality gate (base, untrained Pythia): https://github.com/akash2101h/cloud-computing-assignment/actions/runs/42449897580
 
 ## Layout
