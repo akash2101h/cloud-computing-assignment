@@ -1,5 +1,5 @@
 version: v2
-model_name: /home/akash/pythia-70m
+model_name: EleutherAI/pythia-70m
 train_file: results/train.jsonl
 max_examples: 1500
 seed: 42
