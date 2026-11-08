@@ -1,0 +1,78 @@
+name: ci
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      model_tag:
+        description: "Release tag holding the model archive (v1 = good, base = untrained)"
+        default: "v1"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install ruff
+      - run: ruff check worker service training tests ci
+
+  unit-tests:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install pytest
+      - run: python -m pytest -q tests
+
+  evaluate:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.model_tag || 'v1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -r ci/requirements.txt
+      - name: Download model from the GitHub Release
+        run: |
+          mkdir model
+          curl -sSL -o model.tar.gz "https://github.com/${{ github.repository }}/releases/download/${TAG}/model-${TAG}.tar.gz"
+          tar -xzf model.tar.gz -C model
+      - name: Predict on validation.jsonl
+        run: python ci/predict.py model data/validation.jsonl predictions.jsonl
+      - name: Score
+        run: python tools/score.py predictions.jsonl data/validation.jsonl --out score_report.json && cat score_report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-${{ env.TAG }}
+          path: |
+            predictions.jsonl
+            score_report.json
+
+  quality-gate:
+    needs: evaluate
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.model_tag || 'v1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: eval-${{ env.TAG }}
+      - name: Gate, JSON validity at least 95
+        run: python tools/score.py predictions.jsonl data/validation.jsonl --min-validity 95
+
+  secret-scan:
+    needs: quality-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
